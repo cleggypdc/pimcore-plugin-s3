@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+    <plugin>
+        <pluginName>S3</pluginName>
+        <pluginDescription><![CDATA[S3 Bucket Sync for Pimcore]]></pluginDescription>
+
+        <!-- meta data -->
+        <pluginVersion>1.0</pluginVersion>
+        <pluginRevision>1</pluginRevision>
+        <pluginBuildTimestamp>0</pluginBuildTimestamp>
+
+        <!-- put in the URL for the plugin configuration eg. /plugin/SearchRestaurants/admin/index -->
+        <pluginIframeSrc />
+
+        <!-- className of the plugin which extends Pimcore_API_Plugin_Abstract-->
+        <pluginClassName>\S3\Plugin</pluginClassName>
+
+        <!-- include paths relative to plugin-directory -->
+        <pluginIncludePaths>
+            <path>/S3/lib</path>
+        </pluginIncludePaths>
+
+        <!-- namespaces to register with autoloader-->
+        <pluginNamespaces>
+            <namespace>S3</namespace>
+        </pluginNamespaces>
+
+        <!-- js files with path relative to plugin-directory -->
+        <pluginJsPaths />
+
+        <!-- css files with path relative to plugin-directory -->
+        <pluginCssPaths />
+        
+    </plugin>
+</zend-config>
