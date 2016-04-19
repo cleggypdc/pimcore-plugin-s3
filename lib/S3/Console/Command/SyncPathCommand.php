@@ -16,6 +16,7 @@ namespace S3\Console\Command;
 use S3\Model\S3Asset;
 use Pimcore\Model\Asset;
 use Pimcore\Console\AbstractCommand;
+use Pimcore\Console\Dumper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,7 +26,7 @@ class SyncPathCommand extends AbstractCommand
     protected function configure()
     {
         $this
-            ->setName('S3:sync:path')
+            ->setName('s3:sync:path')
             ->addArgument(
                 'path',
                 InputArgument::REQUIRED,

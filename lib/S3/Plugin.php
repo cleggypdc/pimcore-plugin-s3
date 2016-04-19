@@ -121,6 +121,16 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                 'name' => 'plugin_s3_keep_deleted_assets',
                 'type' => 'bool',
                 'data' => false
+            ],
+            [
+                'name' => 'plugin_s3_generate_s3thumbnails',
+                'type' => 'bool',
+                'data' => false
+            ],
+            [
+                'name' => 'plugin_s3_s3thumbnail_config_names',
+                'type' => 'text',
+                'data' => ''
             ]
         ];
 

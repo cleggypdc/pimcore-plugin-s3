@@ -52,6 +52,23 @@ class Config
     public $s3Enabled;
 
 
+    /**
+     * @var bool $generateS3Thumbnails
+     */
+    public $generateS3Thumbnails;
+
+
+    /**
+     * @var array $S3ThumbnailConfigNames
+     */
+    public $S3ThumbnailConfigNames;
+
+
+    /**
+     * Config constructor.
+     *
+     * @param \Pimcore\Model\Asset $asset
+     */
     public function __construct(Asset $asset)
     {
 
@@ -96,6 +113,22 @@ class Config
             $this->s3Enabled = ($asset->getProperty('plugin_s3_disable')) ? false : true;
         } else {
             $this->s3Enabled = (PimcoreConfig::getWebsiteConfig()->get('plugin_s3_disable')) ? false : true;
+        }
+
+        if ($asset->getProperty('plugin_s3_generate_s3thumbnails') !== null) {
+            $this->generateS3Thumbnails = (bool) $asset->getProperty('plugin_s3_generate_s3thumbnails');
+        } else {
+            $this->generateS3Thumbnails = (bool) PimcoreConfig::getWebsiteConfig()->get('plugin_s3_generate_s3thumbnails') ?: false;
+        }
+
+        if ($asset->getProperty('plugin_s3_s3thumbnail_config_names') !== null) {
+            $this->S3ThumbnailConfigNames = $asset->getProperty('plugin_s3_s3thumbnail_config_names');
+        } else {
+            $this->S3ThumbnailConfigNames = PimcoreConfig::getWebsiteConfig()->get('plugin_s3_s3thumbnail_config_names') ?: false;
+        }
+
+        if ($this->S3ThumbnailConfigNames) {
+            $this->S3ThumbnailConfigNames = array_map('trim', array_filter(explode(',', $this->S3ThumbnailConfigNames)));
         }
 
     }
@@ -212,7 +245,43 @@ class Config
         return $this;
     }
 
+    /**
+     * @return boolean
+     */
+    public function getGenerateS3Thumbnails()
+    {
+        return $this->generateS3Thumbnails;
+    }
 
+    /**
+     * @param boolean $generateS3Thumbnails
+     * @return Config
+     */
+    public function setGenerateS3Thumbnails($generateS3Thumbnails)
+    {
+        $this->generateS3Thumbnails = $generateS3Thumbnails;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getS3ThumbnailConfigNames()
+    {
+        return ($this->S3ThumbnailConfigNames) ?: [];
+    }
+
+    /**
+     * @param array $S3ThumbnailConfigNames
+     * @return Config
+     */
+    public function setS3ThumbnailConfigNames($S3ThumbnailConfigNames)
+    {
+        $this->S3ThumbnailConfigNames = $S3ThumbnailConfigNames;
+
+        return $this;
+    }
 
 }
 
